@@ -1,5 +1,7 @@
 <?php
 
+namespace MPWAR5\GildedRoseKata;
+
 class Item {
 
 	var $name;

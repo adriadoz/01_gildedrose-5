@@ -1,5 +1,7 @@
 <?php
 
+namespace MPWAR5\GildedRoseTest;
+
 class ItemBuilder {
 
 	var $name;

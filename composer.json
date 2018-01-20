@@ -1,0 +1,28 @@
+{
+    "name": "01_gildedrose-g5/gildedrose",
+    "description": "Script de control de inventario que se ejecuta diariamente",
+    "type": "GildedRose",
+    "license": "Oriol Yllà i Adrià Velardos",
+    "require": {
+    "php": "^7.1"
+    },
+    "require-dev": {
+    "symfony/var-dumper": "^4.0",
+    "phpunit/phpunit": "^6.5"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+    "psr-4": {
+    "MPWAR5\\GildedRoseKata\\": "src/"
+    }
+    },
+    "autoload-dev": {
+    "psr-4": {
+    "MPWAR5\\GildedRoseTest\\": "test/"
+    }
+    },
+    "config": {
+    "optimize-autoloader": true
+    }
+}

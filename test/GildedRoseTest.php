@@ -1,5 +1,7 @@
 <?php
 
+namespace MPWAR5\GildedRoseTest;
+
 include_once 'src/GildedRose.php';
 include_once 'test/ItemBuilder.php';
 

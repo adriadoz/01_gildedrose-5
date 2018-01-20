@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/Item.php';
+namespace MPWAR5\GildedRoseKata;
 
 class GildedRose {
 
@@ -12,7 +12,7 @@ class GildedRose {
 			$agedBrieName = "Aged Brie";
 			$backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
 			$sulfurasName = "Sulfuras, Hand of Ragnaros";
-			if (($agedBireName != $itemName) && ($backstagePassesName != $itemName)) {
+			if (($agedBrieName != $itemName) && ($backstagePassesName != $itemName)) {
 				if ($items[$i]->getQuality() > 0) {
 					if ($sulfurasName != $itemName) {
 						$items[$i]->setQuality($items[$i]->getQuality() - 1);
@@ -41,7 +41,7 @@ class GildedRose {
 			}
 
 			if ($items[$i]->getSellIn() < 0) {
-				if ($agedBireName != $itemName) {
+				if ($agedBrieName != $itemName) {
 					if ($backstagePassesName != $itemName) {
 						if ($items[$i]->getQuality() > 0) {
 							if ($sulfurasName != $itemName) {
