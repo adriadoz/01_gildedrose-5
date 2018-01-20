@@ -8,17 +8,20 @@ class GildedRose {
 		$items
 	) {
 		for ($i = 0; $i < count($items); $i++) {
-			var $itemName = $items[$i]->getName();
-			if (("Aged Brie" != $itemName) && ("Backstage passes to a TAFKAL80ETC concert" != $itemName)) {
+			$itemName = $items[$i]->getName();
+			$agedBrieName = "Aged Brie";
+			$backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
+			$sulfurasName = "Sulfuras, Hand of Ragnaros";
+			if (($agedBireName != $itemName) && ($backstagePassesName != $itemName)) {
 				if ($items[$i]->getQuality() > 0) {
-					if ("Sulfuras, Hand of Ragnaros" != $itemName) {
+					if ($sulfurasName != $itemName) {
 						$items[$i]->setQuality($items[$i]->getQuality() - 1);
 					}
 				}
 			} else {
 				if ($items[$i]->getQuality() < 50) {
 					$items[$i]->setQuality($items[$i]->getQuality() + 1);
-					if ("Backstage passes to a TAFKAL80ETC concert" == $itemName) {
+					if ($backstagePassesName == $itemName) {
 						if ($items[$i]->getSellIn() < 11) {
 							if ($items[$i]->getQuality() < 50) {
 								$items[$i]->setQuality($items[$i]->getQuality() + 1);
@@ -33,15 +36,15 @@ class GildedRose {
 				}
 			}
 
-			if ("Sulfuras, Hand of Ragnaros" != $itemName) {
+			if ($sulfurasName != $itemName) {
 				$items[$i]->setSellIn($items[$i]->getSellIn() - 1);
 			}
 
 			if ($items[$i]->getSellIn() < 0) {
-				if ("Aged Brie" != $itemName) {
-					if ("Backstage passes to a TAFKAL80ETC concert" != $itemName) {
+				if ($agedBireName != $itemName) {
+					if ($backstagePassesName != $itemName) {
 						if ($items[$i]->getQuality() > 0) {
-							if ("Sulfuras, Hand of Ragnaros" != $itemName) {
+							if ($sulfurasName != $itemName) {
 								$items[$i]->setQuality($items[$i]->getQuality() - 1);
 							}
 						}
