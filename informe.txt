@@ -1,0 +1,21 @@
+**** IFORME ****
+
+
+1- Qué hace el código (2-3 lineas)
+
+El código disminuye el atributo de cualidad de todos los items, menos algunos casos en los que según el nombre del item se incrementa la cualidad del mismo.
+
+
+2- Qué problemas tiene
+
+Vemos que hay varias llamadas a métodos y atributos de la clase item. Las variables no tienen un nombre descriptivo.
+Hay varios Magic numbers por el código
+Y podemos observar trozos de código repetido y lógica que se repiten.
+
+
+3- Qué soluciones concretas proponéis para esos problemas
+
+Proponemos guardar valores en variables para evitar llamadas multiples a los mismos métodos.
+Crear una función con nombre descriptivo que valide el nombre.
+Poner en variables los strings de nombres a comprobar.
+Otra opción, podría ser  incoporar la función updateQuality como metodo própio de los items, nos ahorrariamos usar los geters y seters, ya que estaríamos usando los atributos de la misma.
