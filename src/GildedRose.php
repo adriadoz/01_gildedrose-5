@@ -53,13 +53,13 @@ class GildedRose {
 	
 			   else if ($gildedRoseInstance->itemName == $backstagePassesName) {
 				   if($gildedRoseInstance->sellIn == 0) {
-					   $this->item.setQuality(0);
+					   $gildedRoseInstance->item.setQuality(0);
 				   }
 				   else if($gildedRoseInstance->sellIn <= 5) {
-					   $this->qualityUp(3);
+					   $gildedRoseInstance->qualityUp(3);
 				   }
 				   else if($gildedRoseInstance->sellIn <= 10) {
-					   $this->qualityUp(2);
+					   $gildedRoseInstance->qualityUp(2);
 				   }
 			   }
 			   else {
