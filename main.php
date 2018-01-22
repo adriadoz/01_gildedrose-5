@@ -20,5 +20,5 @@ $gildedRose = new GildedRose();
 $gildedRose->updateQuality(...$items);
 
 foreach ($items as $item) {
-	echo "Item: {$item->name}, Quality: {$item->quality}, SellIn: {$item->sellIn}\n";
+	echo "Item: {$item->getName()}, Quality: {$item->getQuality()}, SellIn: {$item->getSellIn()}\n";
 }

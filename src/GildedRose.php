@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace MPWAR5\GildedRoseKata;
 
-class GildedRose
+final class GildedRose
 {
     private $item;
     private $itemName;
@@ -10,23 +10,23 @@ class GildedRose
     private $sellIn;
     private const MAX_QUALITY = 50;
 
-    private function qualityUp($increment)
+    private function qualityUp(Item $item, $increment)
     {
-        if ($this->quality < $this::MAX_QUALITY) {
-            $this->item->setQuality($this->quality + $increment);
+        if ($item->getQuality() < $this::MAX_QUALITY) {
+            $item->setQuality($item->getQuality() + $increment);
         }
     }
 
-    private function qualityDown($decrement)
+    private function qualityDown(Item $item, $decrement)
     {
         if ($this->quality <= 0) return;
-        $this->item->setQuality($this->quality - $decrement);
+        $item->setQuality($this->quality - $decrement);
     }
 
-    private function sellInDown()
+    private function sellInDown(Item $item)
     {
         if ($this->sellIn <= 0) return;
-        $this->item->setQuality($this->quality - 1);
+        $item->setSellIn($this->sellIn - 1);
     }
 
     public function updateQuality(
@@ -49,20 +49,20 @@ class GildedRose
         $this->sellIn = $item->getSellIn();
 
         if ($this->itemName == $agedBrieName) {
-            $this->qualityUp(1);
+            $this->qualityUp($item, 1);
         } else if ($this->itemName == $sulfurasName) {
-            $this->item->setQuality($this->item->getQuality());
+            $item->setQuality($item->getQuality());
         } else if ($this->itemName == $backstagePassesName) {
             if ($this->sellIn == 0) {
-                $this->item->setQuality(0);
+                $item->setQuality(0);
             } else if ($this->sellIn <= 5) {
-                $this->qualityUp(3);
+                $this->qualityUp($item,3);
             } else if ($this->sellIn <= 10) {
-                $this->qualityUp(2);
+                $this->qualityUp($item,2);
             }
         } else {
-            $this->qualityDown(1);
+            $this->qualityDown($item,1);
         }
-        $this->sellInDown();
+        $this->sellInDown($item);
     }
 }

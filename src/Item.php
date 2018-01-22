@@ -4,9 +4,9 @@ namespace MPWAR5\GildedRoseKata;
 
 class Item {
 
-	var $name;
-	var $sellIn;
-	var $quality;
+	private $name;
+    private $sellIn;
+    private $quality;
 
 	public function __construct(
 		$name, 
