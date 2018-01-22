@@ -8,11 +8,11 @@ class GildedRose
     private $itemName;
     private $quality;
     private $sellIn;
-    private $maxQuality = 50;
+    private const MAX_QUALITY = 50;
 
     private function qualityUp($increment)
     {
-        if ($this->quality < $this->maxQuality) {
+        if ($this->quality < $this::MAX_QUALITY) {
             $this->item->setQuality($this->quality + $increment);
         }
     }
