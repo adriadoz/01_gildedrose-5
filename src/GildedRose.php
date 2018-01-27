@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace MPWAR5\GildedRoseKata;
 
 final class GildedRose
@@ -8,51 +9,54 @@ final class GildedRose
     private $itemName;
     private $quality;
     private $sellIn;
+    private const MIN_QUALITY = 0;
     private const MAX_QUALITY = 50;
     private const MIN_INCREMENT = 1;
+    private const MAX_INCREMENT = 2;
+    private const MIN_SELLIN = 0;
+    private const MID_SELLIN = 5;
+    private const MAX_SELLIN = 10;
 
-    private function qualityUp(Item $item, $increment)
+    private function qualityUp(Item $item, $increment): void
     {
         if ($this->canIncreaseQuality($item->getQuality())) {
             $item->setQuality($item->getQuality() + $increment);
         }
     }
 
-    private function qualityDown(Item $item, $decrement)
+    private function qualityDown(Item $item, int $decrement): void
     {
         if ($this->quality <= 0) return;
         $item->setQuality($this->quality - $decrement);
     }
 
-    private function sellInDown(Item $item)
+    private function sellInDown(Item $item): void
     {
         if ($this->sellIn <= 0) return;
         $item->setSellIn($this->sellIn - 1);
     }
 
-    private function canIncreaseQuality($quality): bool
+    private function canIncreaseQuality(int $quality): bool
     {
-        if($quality < $this::MAX_QUALITY) return true;
+        if ($quality < $this::MAX_QUALITY) return true;
         return false;
     }
 
     public function updateQuality(
         Item ...$items
-    ): void{
+    ): void
+    {
         array_map($this->updateItemQuality(), $items);
     }
 
     public function updateItemQuality(): callable
     {
-        return function(Item $item):void
-        {
+        return function (Item $item): void {
             $agedBrieName = "Aged Brie";
             $backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
             $sulfurasName = "Sulfuras, Hand of Ragnaros";
 
-            $this->item = $item;
             $this->itemName = $item->getName();
-            $this->quality = $item->getQuality();
             $this->sellIn = $item->getSellIn();
 
             if ($this->itemName == $agedBrieName) {
@@ -61,11 +65,11 @@ final class GildedRose
                 $item->setQuality($item->getQuality());
             } else if ($this->itemName == $backstagePassesName) {
                 $this->qualityUp($item, $this::MIN_INCREMENT);
-                if ($this->sellIn == 0) {
-                    $item->setQuality(0);
-                } else if ($this->sellIn <= 5) {
-                    $this->qualityUp($item, 2);
-                } else if ($this->sellIn <= 10) {
+                if ($this->sellIn == $this::MIN_SELLIN) {
+                    $item->setQuality($this::MIN_QUALITY);
+                } else if ($this->sellIn <= $this::MID_SELLIN) {
+                    $this->qualityUp($item, $this::MAX_INCREMENT);
+                } else if ($this->sellIn <= $this::MAX_SELLIN) {
                     $this->qualityUp($item, $this::MIN_INCREMENT);
                 }
             } else {
