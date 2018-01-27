@@ -53,12 +53,13 @@ final class GildedRose
         } else if ($this->itemName == $sulfurasName) {
             $item->setQuality($item->getQuality());
         } else if ($this->itemName == $backstagePassesName) {
+            $this->qualityUp($item,1);
             if ($this->sellIn == 0) {
                 $item->setQuality(0);
             } else if ($this->sellIn <= 5) {
-                $this->qualityUp($item,3);
-            } else if ($this->sellIn <= 10) {
                 $this->qualityUp($item,2);
+            } else if ($this->sellIn <= 10) {
+                $this->qualityUp($item,1);
             }
         } else {
             $this->qualityDown($item,1);
