@@ -9,10 +9,11 @@ final class GildedRose
     private $quality;
     private $sellIn;
     private const MAX_QUALITY = 50;
+    private const MIN_INCREMENT = 1;
 
     private function qualityUp(Item $item, $increment)
     {
-        if ($item->getQuality() < $this::MAX_QUALITY) {
+        if ($this->canIncreaseQuality($item->getQuality())) {
             $item->setQuality($item->getQuality() + $increment);
         }
     }
@@ -29,41 +30,47 @@ final class GildedRose
         $item->setSellIn($this->sellIn - 1);
     }
 
+    private function canIncreaseQuality($quality): bool
+    {
+        if($quality < $this::MAX_QUALITY) return true;
+        return false;
+    }
+
     public function updateQuality(
         Item ...$items
     ): void{
-        foreach($items as $item){
-            $this->updateItemQuality($item);
-        }
+        array_map($this->updateItemQuality(), $items);
     }
 
-    public function updateItemQuality(Item $item): void
+    public function updateItemQuality(): callable
     {
-        $agedBrieName = "Aged Brie";
-        $backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
-        $sulfurasName = "Sulfuras, Hand of Ragnaros";
+        return function(Item $item):void {
+            $agedBrieName = "Aged Brie";
+            $backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
+            $sulfurasName = "Sulfuras, Hand of Ragnaros";
 
-        $this->item = $item;
-        $this->itemName = $item->getName();
-        $this->quality = $item->getQuality();
-        $this->sellIn = $item->getSellIn();
+            $this->item = $item;
+            $this->itemName = $item->getName();
+            $this->quality = $item->getQuality();
+            $this->sellIn = $item->getSellIn();
 
-        if ($this->itemName == $agedBrieName) {
-            $this->qualityUp($item, 1);
-        } else if ($this->itemName == $sulfurasName) {
-            $item->setQuality($item->getQuality());
-        } else if ($this->itemName == $backstagePassesName) {
-            $this->qualityUp($item,1);
-            if ($this->sellIn == 0) {
-                $item->setQuality(0);
-            } else if ($this->sellIn <= 5) {
-                $this->qualityUp($item,2);
-            } else if ($this->sellIn <= 10) {
-                $this->qualityUp($item,1);
+            if ($this->itemName == $agedBrieName) {
+                $this->qualityUp($item, 1);
+            } else if ($this->itemName == $sulfurasName) {
+                $item->setQuality($item->getQuality());
+            } else if ($this->itemName == $backstagePassesName) {
+                $this->qualityUp($item, $this::MIN_INCREMENT);
+                if ($this->sellIn == 0) {
+                    $item->setQuality(0);
+                } else if ($this->sellIn <= 5) {
+                    $this->qualityUp($item, 2);
+                } else if ($this->sellIn <= 10) {
+                    $this->qualityUp($item, $this::MIN_INCREMENT);
+                }
+            } else {
+                $this->qualityDown($item, $this::MIN_INCREMENT);
             }
-        } else {
-            $this->qualityDown($item,1);
-        }
-        $this->sellInDown($item);
+            $this->sellInDown($item);
+        };
     }
 }
