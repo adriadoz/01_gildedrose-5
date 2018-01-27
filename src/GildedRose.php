@@ -44,7 +44,8 @@ final class GildedRose
 
     public function updateItemQuality(): callable
     {
-        return function(Item $item):void {
+        return function(Item $item):void
+        {
             $agedBrieName = "Aged Brie";
             $backstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
             $sulfurasName = "Sulfuras, Hand of Ragnaros";
@@ -55,7 +56,7 @@ final class GildedRose
             $this->sellIn = $item->getSellIn();
 
             if ($this->itemName == $agedBrieName) {
-                $this->qualityUp($item, 1);
+                $this->qualityUp($item, $this::MIN_INCREMENT);
             } else if ($this->itemName == $sulfurasName) {
                 $item->setQuality($item->getQuality());
             } else if ($this->itemName == $backstagePassesName) {
