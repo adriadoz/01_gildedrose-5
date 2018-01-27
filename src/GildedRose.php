@@ -5,7 +5,6 @@ namespace MPWAR5\GildedRoseKata;
 
 final class GildedRose
 {
-    private $item;
     private $itemName;
     private $quality;
     private $sellIn;
