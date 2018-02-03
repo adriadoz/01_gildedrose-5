@@ -6,12 +6,11 @@ namespace MPWAR5\GildedRoseKata;
 final class GildedRose
 {
     public function updateQuality(
-        Item ...$items
+        ItemDecorator ...$items
     ): void
     {
-        $updater = new UpdateQuality();
-        array_map($updater, $items);
+        foreach ($items as $item){
+            $item->updateItem();
+        }
     }
-
-
 }

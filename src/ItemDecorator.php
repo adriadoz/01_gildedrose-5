@@ -6,6 +6,7 @@ namespace MPWAR5\GildedRoseKata;
 class ItemDecorator
 {
     protected $item;
+    private $itemQuality;
 
     public function __construct(Item $item)
     {
@@ -14,72 +15,25 @@ class ItemDecorator
 
     public function updateItem(): void
     {
-        $this->updateQuality();
-        $this->decreaseSellIn();
+        var_dump($this->item->getQuality());
+        $this->itemQuality = $this->item->getQuality();
+        if($this->itemQuality > 0 && $this->itemQuality < 50)
+        {
+            $this->updateQuality();
+        }
+        if($this->item->getSellIn() > 0)
+        {
+            $this->decreaseSellIn();
+        }
     }
 
-    public function updateQuality(): void
+    protected function updateQuality(): void
     {
         $this->item->setQuality($this->item->getQuality() - 1);
     }
 
-    public function decreaseSellIn(): void
+    protected function decreaseSellIn(): void
     {
         $this->item->setSellIn($this->item->getSellIn() - 1);
-    }
-}
-
-class AgedBrieItemDecorator extends ItemDecorator
-{
-    private $itemDecorator;
-
-    public function __construct(ItemDecorator $itemDecorator)
-    {
-        $this->$itemDecorator = $itemDecorator;
-    }
-
-    public function updateQuality(): void
-    {
-        $this->itemDecorator->setQuality($this->item->getQuality() + 1);
-    }
-}
-
-class SulfurasItemDecorator extends ItemDecorator
-{
-    private $itemDecorator;
-
-    public function __construct(ItemDecorator $itemDecorator)
-    {
-        $this->itemDecorator = $itemDecorator;
-    }
-
-    public function updateQuality(): void
-    {
-        return;
-    }
-}
-
-class BackstagePassItemDecorator extends ItemDecorator
-{
-    private $itemDecorator;
-    private $sellIn;
-
-    public function __construct(ItemDecorator $itemDecorator)
-    {
-        $this->itemDecorator = $itemDecorator;
-    }
-
-    public function updateQuality(): void
-    {
-        $this->sellIn = $this->itemDecorator->item->getSellIn();
-        if ($this->sellIn == 0) {
-            $this->itemDecorator->setQuality(0);
-        } elseif
-        ($this->sellIn <= 5) {
-            $this->itemDecorator->setQuality($this->item->getQuality() + 3);
-        } elseif
-        ($this->sellIn <= 10) {
-            $this->itemDecorator->setQuality($this->item->getQuality() + 2);
-        }
     }
 }
