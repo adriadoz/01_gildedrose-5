@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MPWAR5\GildedRoseKata;
 
@@ -55,13 +56,13 @@ final class UpdateQuality
         } else if ($this->itemName == $sulfurasName) {
             $item->setQuality($item->getQuality());
         } else if ($this->itemName == $backstagePassesName) {
-            $this->qualityUp($item, $this::MIN_INCREMENT);
-            if ($this->sellIn == $this::MIN_SELLIN) {
-                $item->setQuality($this::MIN_QUALITY);
-            } else if ($this->sellIn <= $this::MID_SELLIN) {
-                $this->qualityUp($item, $this::MAX_INCREMENT);
-            } else if ($this->sellIn <= $this::MAX_SELLIN) {
-                $this->qualityUp($item, $this::MIN_INCREMENT);
+            $this->qualityUp($item, 1);
+            if ($this->sellIn == 0) {
+                $item->setQuality(0);
+            } else if ($this->sellIn <= 5) {
+                $this->qualityUp($item, 2);
+            } else if ($this->sellIn <= 10) {
+                $this->qualityUp($item, 1);
             }
         } else {
             $this->qualityDown($item, $this::MIN_INCREMENT);

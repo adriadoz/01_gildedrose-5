@@ -2,7 +2,7 @@
 
 namespace MPWAR5\GildedRoseKata;
 
-class Item
+final class Item
 {
 
     private $name;
