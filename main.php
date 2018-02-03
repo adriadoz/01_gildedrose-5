@@ -15,10 +15,10 @@ use MPWAR5\GildedRoseKata\BackstagePassItemDecorator;
 $items = array();
 
 $items [] = new ItemDecorator(new Item("+5 Dexterity Vest", 10, 20));
-$items [] = new AgedBrieItemDecorator(new ItemDecorator(new Item("Aged Brie", 2, 0)));
+$items [] = new AgedBrieItemDecorator(new Item("Aged Brie", 2, 0));
 $items [] = new ItemDecorator(new Item("Elixir of the Mongoose", 5, 7));
-$items [] = new SulfurasItemDecorator(new ItemDecorator(new Item("Sulfuras, Hand of Ragnaros", 0, 80)));
-$items [] = new BackstagePassItemDecorator(new ItemDecorator(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)));
+$items [] = new SulfurasItemDecorator(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
+$items [] = new BackstagePassItemDecorator(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
 $items [] = new ItemDecorator(new Item("Conjured Mana Cake", 3, 6));
 
 $gildedRose = new GildedRose();

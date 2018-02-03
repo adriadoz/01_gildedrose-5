@@ -5,25 +5,20 @@ namespace MPWAR5\GildedRoseKata;
 
 final class BackstagePassItemDecorator extends ItemDecorator
 {
-    private $itemDecorator;
     private $sellIn;
-
-    public function __construct(ItemDecorator $itemDecorator)
-    {
-        $this->itemDecorator = $itemDecorator;
-    }
 
     protected function updateQuality(): void
     {
-        $this->sellIn = $this->itemDecorator->item->getSellIn();
+        $this->sellIn = $this->item->getSellIn();
+        $this->item->setQuality($this->item->getQuality() + 1);
         if ($this->sellIn == 0) {
-            $this->itemDecorator->setQuality(0);
+            $this->item->setQuality(0);
         } elseif
         ($this->sellIn <= 5) {
-            $this->itemDecorator->setQuality($this->item->getQuality() + 3);
+            $this->item->setQuality($this->item->getQuality() + 2);
         } elseif
         ($this->sellIn <= 10) {
-            $this->itemDecorator->setQuality($this->item->getQuality() + 2);
+            $this->item->setQuality($this->item->getQuality() + 1);
         }
     }
 }

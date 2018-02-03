@@ -11,13 +11,12 @@ class ItemDecorator
     public function __construct(Item $item)
     {
         $this->item = $item;
+        $this->itemQuality = $this->item->getQuality();
     }
 
     public function updateItem(): void
     {
-        var_dump($this->item->getQuality());
-        $this->itemQuality = $this->item->getQuality();
-        if($this->itemQuality > 0 && $this->itemQuality < 50)
+        if($this->itemQuality >= 0 && $this->itemQuality < 50)
         {
             $this->updateQuality();
         }
@@ -27,8 +26,24 @@ class ItemDecorator
         }
     }
 
+    public function getName(): string
+    {
+        return $this->item->getName();
+    }
+
+    public function getQuality(): int
+    {
+        return $this->item->getQuality();
+    }
+
+    public function getSellIn(): int
+    {
+        return $this->item->getSellIn();
+    }
+
     protected function updateQuality(): void
     {
+        var_dump($this->item->getQuality());
         $this->item->setQuality($this->item->getQuality() - 1);
     }
 

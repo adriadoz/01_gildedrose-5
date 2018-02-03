@@ -5,15 +5,8 @@ namespace MPWAR5\GildedRoseKata;
 
 final class AgedBrieItemDecorator extends ItemDecorator
 {
-    private $itemDecorator;
-
-    public function __construct(ItemDecorator $itemDecorator)
-    {
-        $this->itemDecorator = $itemDecorator;
-    }
-
     protected function updateQuality(): void
     {
-        $this->itemDecorator->setQuality($this->item->getQuality() + 1);
+        $this->item->setQuality($this->item->getQuality() + 1);
     }
 }
