@@ -43,7 +43,6 @@ class ItemDecorator
 
     protected function updateQuality(): void
     {
-        var_dump($this->item->getQuality());
         $this->item->setQuality($this->item->getQuality() - 1);
     }
 
